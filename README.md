@@ -3,6 +3,8 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourname/scholarship-miniprogram/blob/main/LICENSE)
 ![WeChat Mini Program](https://img.shields.io/badge/Platform-WeChat_Mini_Program-green.svg)
 
+![demo](./readme_file/screenshot.webp)
+
 本小程序是基于原 GitHub Pages 项目 ([scholarship-query](https://github.com/kangningyuan/scholarship-query)) 迁移而来的微信小程序版本，提供快速高效的奖学金信息查询服务。数据通过 CDN 分片加载技术实现秒级响应，支持学号/姓名/拼音多维度检索。
 
 ## 技术亮点 ✨
