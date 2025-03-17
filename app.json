@@ -1,0 +1,11 @@
+{
+  "pages": ["pages/index/index"],
+  "window": {
+    "navigationBarTitleText": "叔蘋奖学金得奖信息查询系统",
+    "navigationBarBackgroundColor": "#4CAF50"
+    },
+  "requiredBackgroundModes": ["network"],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

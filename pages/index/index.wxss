@@ -1,0 +1,94 @@
+/* 继承原CSS的90%样式 */
+.container {
+  padding: 20rpx;
+}
+
+.logo {
+  height: 185rpx;
+  width: 198rpx;
+  margin: 10rpx auto;
+}
+
+/* 独立class更规范 */
+.title {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin: 10rpx auto;
+  letter-spacing: 2rpx; /* 可选字间距 */
+  color: #2c3e50;       /* 深灰色更专业 */
+}
+
+.search-box {
+  margin: 20rpx auto;
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+}
+
+#searchInput {
+  width: 100%;
+  padding: 24rpx 40rpx;
+  border: 4rpx solid #4CAF50;
+  border-radius: 60rpx;
+}
+
+/* 调整后的结果卡片样式 */
+.result-card {
+  background: #fff;
+  padding: 40rpx;
+  margin: 30rpx auto;
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  border-radius: 14rpx; /* 新增圆角属性 */
+}
+
+/* 名字和ID同行容器 */
+.name-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20rpx;
+  /* 元素间距 */
+}
+
+/* 基础文字样式 */
+.result-card text {
+  display: block;
+  /* 确保其他元素分行 */
+  line-height: 1.6;
+}
+
+.name {
+  font-weight: bold;
+}
+
+/* ID标签样式 */
+.id-tag {
+  color: #666;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 可选居中 */
+  gap: 20rpx;
+  /* 行间距 */
+  position: relative;
+  margin: 20rpx auto;
+  padding-top: 20rpx;
+  padding-bottom: 60rpx;   /* 可选：增加文本与底部的呼吸空间 */
+  /* 留出分割线空间 */
+}
+
+/* 页脚线 */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 2rpx;
+  background: #e0e0e0;
+}

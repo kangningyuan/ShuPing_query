@@ -1,0 +1,98 @@
+const app = getApp()
+const DEBOUNCE_TIME = 400
+const debounce = require('../../utils/debounce');
+
+Page({
+
+  data: {
+    isLoading: true,
+    searchResults: [],
+    resultCount: 0,
+    allDataLength: 0
+  },
+
+  onLoad() {
+    this.loadAllData()
+  },
+
+  async loadAllData() {
+    try {
+      const requests = [];
+      for (let i = 0; i < app.globalData.CHUNK_COUNT; i++) {
+        const chunkId = i.toString().padStart(3, '0');
+        requests.push(
+          new Promise((resolve, reject) => {
+            wx.request({
+              url: `${app.globalData.CDN_BASE}/data_upto2024/chunk_${chunkId}.json`,
+              enableCache: false,
+              success: resolve,
+              fail: reject
+            });
+          })
+        );
+      }
+
+      const res = await Promise.all(requests);
+      app.globalData.allData = res.flatMap(r => r.data);
+      this.setData({
+        allDataLength: app.globalData.allData.length,
+        isLoading: false,
+        allData: app.globalData.allData // 显式赋值
+      });
+    } catch (error) {
+      wx.showToast({
+        title: '数据加载失败',
+        icon: 'error'
+      });
+      this.setData({
+        isLoading: false,
+        allData: []
+      }); // 数据加载失败时回退为空数组
+    }
+  },
+
+
+  handleInput: debounce(function (e) {
+    if (!this.data.allData || this.data.isLoading) {
+      wx.showToast({
+        title: '数据未加载完成',
+        icon: 'none'
+      });
+      return;
+    }
+
+    const keyword = e.detail.value.trim().toLowerCase();
+    const results = this.search(keyword);
+    this.setData({
+      searchResults: results,
+      resultCount: results.length
+    });
+  }, DEBOUNCE_TIME),
+
+
+  search(keyword) {
+    // 新增空关键词判断
+    if (!keyword || !this.data.allData) return [];
+
+    return this.data.allData.reduce((results, item) => {
+      if (!item || typeof item !== 'object') return results;
+
+      try {
+        const matchConditions = [
+          item.base_id?.startsWith(keyword),
+          item.name?.toLowerCase().includes(keyword),
+          item.pinyin?.includes(keyword)
+        ];
+
+        if (matchConditions.some(Boolean)) {
+          results.push(Object.assign({}, item)); // 返回数据副本避免污染
+        }
+      } catch (e) {
+        console.warn('异常数据项:', item, e);
+      }
+
+      return results;
+    }, []);
+  }
+
+})
