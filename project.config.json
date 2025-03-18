@@ -19,8 +19,10 @@
             "disablePlugins": [],
             "outputPath": ""
         },
-        "condition": true,
-        "minifyWXML": false
+        "condition": false,
+        "minifyWXML": true,
+        "swc": true,
+        "uglifyFileName": true
     },
     "condition": {},
     "editorSetting": {
