@@ -18,12 +18,13 @@ Page({
   async loadAllData() {
     try {
       const requests = [];
+      const cacheBuster = Date.now(); // 生成唯一时间戳参数（共用）
       for (let i = 0; i < app.globalData.CHUNK_COUNT; i++) {
         const chunkId = i.toString().padStart(3, '0');
         requests.push(
           new Promise((resolve, reject) => {
             wx.request({
-              url: `${app.globalData.CDN_BASE}/data_upto2024/chunk_${chunkId}.json`,
+              url: `${app.globalData.CDN_BASE}/data_upto2024/chunk_${chunkId}.json?_t=${cacheBuster}`,
               enableCache: false,
               success: resolve,
               fail: reject
