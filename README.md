@@ -49,10 +49,10 @@
 
 ## 数据更新机制 🔄
 
-### CDN 同步流程
+### CDN 同步流程(必要时请更改chunk数量)
 ```mermaid
 graph LR
-A[更新GitHub数据分片(必要时请更改chunk数量)] --> B[提交到main分支]
+A[更新GitHub数据分片] --> B[提交到main分支]
 B --> C[jsDelivr CDN自动同步]
 C --> D[小程序下次启动加载新数据]
 ```
