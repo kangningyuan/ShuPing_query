@@ -24,7 +24,7 @@ Page({
         requests.push(
           new Promise((resolve, reject) => {
             wx.request({
-              url: `${app.globalData.CDN_BASE}/data_upto2024/chunk_${chunkId}.json?_t=${cacheBuster}`,
+              url: `${app.globalData.CDN_BASE}/data/chunk_${chunkId}.json?_t=${cacheBuster}`,
               enableCache: false,
               success: resolve,
               fail: reject
